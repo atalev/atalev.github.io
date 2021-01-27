@@ -17,10 +17,10 @@
 
 			function init() {
 				aCanvas=document.getElementById('myCanvas');
-				aCanvas.getContext("2d").beginPath();
+				/*aCanvas.getContext("2d").beginPath();
 				aCanvas.getContext("2d").arc(100,100,50,0,2*Math.PI,false);
 				aCanvas.getContext("2d").fillStyle = "black";
-				aCanvas.getContext("2d").stroke();
+				aCanvas.getContext("2d").stroke();*/
 			}
 
 			var a = document.getElementsByTagName("audio")[0];
@@ -56,13 +56,13 @@
 	</head>
 	<body onload='init()'>
 		<canvas id="myCanvas" width="200" height="200"></canvas>
+		<audio controls src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg">
+		</audio>
 		<ul id="audio">
 			<li id="play" onclick="play()"/>
 			<li id="pause" onclick="pause()"/>
 			<li id="stop" onclick="stop()"/>
 		</ul>
 	</body>
-  <audio controls src="./">
-  </audio>
 </html>
 
