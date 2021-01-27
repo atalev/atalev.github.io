@@ -13,46 +13,48 @@
 		</style>
 		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
 		<script>
-			/*var Point = function(x,y,canvas)
-			{
-				this.canvas=canvas;
-				this.canvas2dContext=this.canvas.getContext("2d");
-				this.x=x;
-				this.y=y;
-
-				this.ache = function()
-				{
-
-					this.canvas2dContext.beginPath();
-					this.canvas2dContext.arc(this.x,this.y,5,0,2*Math.PI,false);
-					this.canvas2dContext.fillStyle = "black";
-					this.canvas2dContext.stroke();
-				}
-			}*/ 
-
-			var i=1; 
-			var j=1; 
 			var aCanvas;
 
+			function init() {
+				aCanvas=document.getElementById('myCanvas');
+				aCanvas.getContext("2d").beginPath();
+				aCanvas.getContext("2d").arc(100,100,50,0,2*Math.PI,false);
+				aCanvas.getContext("2d").fillStyle = "black";
+				aCanvas.getContext("2d").stroke();
+			}
+
 			var a = document.getElementsByTagName("audio")[0];
-			a.addEventListener("seeked", function() { v.play(); }, true);
-			a.currentTime = 10.0;
+			a.addEventListener("timeupdate", function() { chargement(); }, true);
+			a.addEventListener("canplay", function() { a.play(); }, true);
+			a.addEventListener("ended", function() { a.stop(); }, true);
+
 
   		function play() {
-    		return 
+    		a.play()
   		}
 
   		function pause() {
-    		return 
+    		a.pause()
   		}
 
   		function stop() {
-    		return 
+				a.pause();
+				a.currentTime=0.0;
   		}
+
+			var t=a.duration;
+			var cur=a.currentTime;
+
+			function chargement() {
+				aCanvas.getContext("2d").beginPath();
+				aCanvas.getContext("2d").arc(100,100,50,0,2*Math.PI*(cur/t),false);
+				aCanvas.getContext("2d").fillStyle = "black";
+				aCanvas.getContext("2d").stroke();
+			}
 
 		</script>
 	</head>
-	<body>
+	<body onload='init()'>
 		<canvas id="myCanvas" width="200" height="200"></canvas>
 		<ul id="audio">
 			<li id="play" onclick="play()"/>
@@ -60,7 +62,7 @@
 			<li id="stop" onclick="stop()"/>
 		</ul>
 	</body>
-    <audio src="./">
-    </audio>
+  <audio controls src="./">
+  </audio>
 </html>
 
