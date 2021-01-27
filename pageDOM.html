@@ -5,6 +5,7 @@
 		{
 			laDiv1=document.createElement('div');
 			laDiv1.setAttribute('id','div1');
+			laDiv1.append(test);
 			laDiv2=document.getElementById('div2');
 			laDiv1.setAttribute('style',"border-color:red; border-style: dotted; height: 50px;width: 50px");
 			laDiv2.appendChild(laDiv1);
@@ -12,7 +13,7 @@
 	</script>
 	</head>
 	<body onload='init()'>
-		<div id='div2' style="border-color:black; border-style: solid; height: 80px;width: 80px;">test</div>
+		<div id='div2' style="border-color:black; border-style: solid; height: 80px;width: 80px;"></div>
 	</body>
 </html>
 
