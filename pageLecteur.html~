@@ -14,19 +14,15 @@
 		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
 		<script>
 			var aCanvas;
+			var a;
 
 			function init() {
 				aCanvas=document.getElementById('myCanvas');
-				/*aCanvas.getContext("2d").beginPath();
-				aCanvas.getContext("2d").arc(100,100,50,0,2*Math.PI,false);
-				aCanvas.getContext("2d").fillStyle = "black";
-				aCanvas.getContext("2d").stroke();*/
+				a = document.getElementsByTagName("audio")[0];
+				a.addEventListener("timeupdate", function() { chargement(); }, true);
+				a.addEventListener("canplay", function() { a.play(); }, true);
+				a.addEventListener("ended", function() { a.stop(); }, true);
 			}
-
-			var a = document.getElementsByTagName("audio")[0];
-			a.addEventListener("timeupdate", function() { chargement(); }, true);
-			a.addEventListener("canplay", function() { a.play(); }, true);
-			a.addEventListener("ended", function() { a.stop(); }, true);
 
 
   		function play() {
@@ -38,14 +34,17 @@
   		}
 
   		function stop() {
+				aCanvas.getContext("2d").clearRect(0, 0, aCanvas.width, aCanvas.height);
 				a.pause();
 				a.currentTime=0.0;
   		}
 
-			var t=a.duration;
-			var cur=a.currentTime;
+			var t;
+			var cur;
 
 			function chargement() {
+				t=a.duration
+				cur=a.currentTime
 				aCanvas.getContext("2d").beginPath();
 				aCanvas.getContext("2d").arc(100,100,50,0,2*Math.PI*(cur/t),false);
 				aCanvas.getContext("2d").fillStyle = "black";
@@ -64,6 +63,5 @@
 			<li id="stop" onclick="stop()"/>
 		</ul>
 	</body>
-
 </html>
 
