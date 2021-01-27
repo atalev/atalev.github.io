@@ -18,12 +18,12 @@ body {
 /* || typography */
 
 h1, h2, h3 {
-  font-family: 'Sonsie One', cursive;
+  font-family: 'Roboto', cursive;
   color: #2a2a2a;
 }
 
 p, input, li {
-  font-family: 'Open Sans Condensed', sans-serif;
+  font-family: 'Roboto', sans-serif;
   color: #2a2a2a;
 }
 
@@ -35,7 +35,7 @@ h1 {
 }
 
 h2 {
-  font-size: 3rem;
+  font-size: 2rem;
   text-align: center;
 }
 
