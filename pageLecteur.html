@@ -20,7 +20,6 @@
 				aCanvas=document.getElementById('myCanvas');
 				a = document.getElementsByTagName("audio")[0];
 				a.addEventListener("timeupdate", function() { chargement(); }, true);
-				a.addEventListener("canplay", function() { a.play(); }, true);
 				a.addEventListener("ended", function() { a.stop(); }, true);
 			}
 
@@ -35,7 +34,7 @@
 
 			function stop() {
 					aCanvas.getContext("2d").clearRect(0, 0, aCanvas.width, aCanvas.height);
-					a.currentTime=0.0;
+					a.currentTime=0;
 					a.pause();
 			}
 
