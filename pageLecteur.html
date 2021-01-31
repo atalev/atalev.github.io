@@ -1,15 +1,15 @@
 <html>
 	<head>
 		<style type="text/css">
-			#audio{position:relative;}
-			#audio li{margin:0;padding:0;list-style:none;position:absolute;top:0;}
-			#audio li,#audio a{height:60px;display:block;}
+			#control{position:relative;}
+			#control li{margin:0;padding:0;list-style:none;position:absolute;top:0;}
+			#control li,#audio a{height:60px;display:block;}
 			#play{left:0px;width:47px;}
-			#play{background-image:url("image.jpg"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
+			#play{background-image:url("play.png"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
 			#pause{right:0px;width:47px;}
-			#pause{background-image:url("image.jpg"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
+			#pause{background-image:url("pause.png"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
 			#stop{left:500px;width:47px;}
-			#stop{background-image:url("image.jpg"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
+			#stop{background-image:url("stop.png"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
 		</style>
 		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
 		<script>
@@ -56,7 +56,7 @@
 		<canvas id="myCanvas" width="200" height="200"></canvas>
 		<audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg">
 		</audio>
-		<ul id="audio">
+		<ul id="control">
 			<li id="play" onclick="play()"/>
 			<li id="pause" onclick="pause()"/>
 			<li id="stop" onclick="stop()"/>
