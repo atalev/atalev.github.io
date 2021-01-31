@@ -25,19 +25,19 @@
 			}
 
 
-  		function play() {
-    		a.play()
-  		}
+			function play() {
+				a.play()
+			}
 
-  		function pause() {
-    		a.pause()
-  		}
+			function pause() {
+				a.pause()
+			}
 
-  		function stop() {
-				aCanvas.getContext("2d").clearRect(0, 0, aCanvas.width, aCanvas.height);
-				a.pause();
-				a.currentTime=0.0;
-  		}
+			function stop() {
+					aCanvas.getContext("2d").clearRect(0, 0, aCanvas.width, aCanvas.height);
+					a.currentTime=0.0;
+					a.pause();
+			}
 
 			var t;
 			var cur;
