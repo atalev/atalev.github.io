@@ -3,12 +3,12 @@
 		<style type="text/css">
 			#control{position:relative;}
 			#control li{margin:0;padding:0;list-style:none;position:absolute;top:0;}
-			#control li,#audio a{height:60px;display:block;}
-			#play{left:0px;width:47px;}
+			#control li{height:60px;display:block;}
+			#play{left:0px;}
 			#play{background-image:url("play.png"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
-			#pause{right:0px;width:47px;}
+			#pause{right:0px;}
 			#pause{background-image:url("pause.png"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
-			#stop{left:500px;width:47px;}
+			#stop{left:500px;}
 			#stop{background-image:url("stop.png"); border:black; border-width: 1px; width:300px; height:300px!important; background-repeat:no-repeat; background-size:300px 300px}
 		</style>
 		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
@@ -49,13 +49,11 @@
 				aCanvas.getContext("2d").fillStyle = "black";
 				aCanvas.getContext("2d").stroke();
 			}
-
 		</script>
 	</head>
 	<body onload='init()'>
 		<canvas id="myCanvas" width="200" height="200"></canvas>
-		<audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg">
-		</audio>
+		<audio src="http://developer.mozilla.org/@api/deki/files/2926/=AudioTest_(1).ogg"></audio>
 		<ul id="control">
 			<li id="play" onclick="play()"/>
 			<li id="pause" onclick="pause()"/>
