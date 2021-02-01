@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<style type="text/css">
+		</style>
+		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
+		<script>
+            var a = 0;
+            var aCanvas;
+            var intervalID;
+            var ctx;
+            var tpsec;
+
+            function init() {
+                aCanvas = document.getElementById('monCanvas');
+                ctx = aCanvas.getContext('2d');
+                ctx.fillStyle = 'red';
+                ctx.fillRect(a, 20, 50, 50);
+                intervalID = window.setInterval(attente,2000);
+            }
+
+            function attente (){
+                window.clearInterval(intervalID);
+                intervalID = window.setInterval(dessiner,100);
+            }
+
+            function dessiner() {
+                tpsec = tpsec + 100;
+                affichageRectangle(a);
+                if (a == 550){
+                    remiseAZero();
+                }
+                a = a + 10;
+            }
+            
+			function affichageRectangle(x){
+                ctx.fillStyle = 'red';
+                ctx.clearRect(x-10, 20, 50, 50);
+                ctx.fillRect(x, 20, 50, 50);
+            }
+
+            function remiseAZero(){
+                affichageRectangle(a);
+                window.clearInterval(intervalID);
+            }
+            
+		</script>
+    </head>
+    <canvas id="monCanvas" width="600" height="600"></canvas>
+	<body id="body" onload='init()'>
+	</body>
+</html>
+
