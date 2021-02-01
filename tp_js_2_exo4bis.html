@@ -17,6 +17,57 @@
             var ctx;
             var tpsec;
 
+        class Coin {
+            constructor(context,image,width, height,x,y,speed, numberOfFrames, delay){
+                this.context=context;
+                this.image=image;
+                this.width=width;
+                this.height=height;
+                this.x=x;
+                this.y=y;
+                this.speed=speed;
+                this.numberOfFrames=numberOfFrames;
+                this.frameIndex=0;
+                this.delay=delay;
+                this.hasStarted=false;
+            }
+
+            clear(){
+                this.context.clearRect(this.x, this.y, this.width, this.height);
+            }
+
+            update(){
+                if((this.hasStarted == false) && (this.delay<wallClock)){
+                    console.log("starting");
+                    this.hasStarted=true;
+                }
+
+
+                if( (this.hasStarted == true) && (wallClock%this.speed == 0)){
+                    if (this.frameIndex < this.numberOfFrames - 1) {	
+                        this.frameIndex += 1;
+                    }else {
+                        this.frameIndex = 0;
+                    }
+                }
+            }
+
+            draw(){
+                this.context.drawImage(
+                    this.image,
+                    this.frameIndex * this.width / this.numberOfFrames,
+                    0,
+                    this.width / this.numberOfFrames,
+                    this.height,
+                    this.x,
+                    this.y,
+                    this.width / this.numberOfFrames,
+                    this.height
+                    );
+            }
+	    }
+
+
             function init() {
                 aCanvas = document.getElementById('monCanvas');
                 ctx = aCanvas.getContext('2d');
