@@ -1,3 +1,31 @@
 <html>
-    rien
-</html>    
+	<head>
+		<style type="text/css">
+		</style>
+		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
+		<script>
+            var a = 10;
+            
+			function compteur(){
+                majAffichage();
+                if (a == 0){
+                    remiseAZero();
+                }
+                a = a - 1;
+            }
+            function majAffichage(){
+                body.innerHTML= a; 
+            }
+            var intervalID = window.setInterval(compteur,1000);
+
+            function remiseAZero(){
+                majAffichage();
+                window.clearInterval(intervalID);
+            }
+            
+		</script>
+	</head>
+	<body id="body" onload='compteur()'>
+	</body>
+</html>
+
