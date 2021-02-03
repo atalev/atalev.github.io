@@ -4,90 +4,40 @@
 		</style>
 		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
 		<script>
-            var a = 0;
-            var aDeux = 0;
-            var aTrois = 0
             var aCanvas;
             var intervalID;
-            var intervalDeuxID;
-            var intervalTroisID;
-            var intervalQuatreID;
-            var intervalCinqID;
-            var intervalSixID;
-            var ctx;
-            var tpsec;
+            var body;
+            var resultText
+            var i = 0;
 
             function init() {
-                aCanvas = document.getElementById('monCanvas');
-                ctx = aCanvas.getContext('2d');
-                ctx.fillStyle = 'red';
-                ctx.fillRect(a, 20, 50, 50);
-                intervalID = window.setInterval(attente,4000);
+                aCanvas=document.getElementById('myCanvas');
+                intervalID = window.setInterval(request(),1000);
             }
 
-            function attente (){
-                window.clearInterval(intervalID);
-                intervalDeuxID = window.setInterval(deuxiemeAttente,1000);
-                intervalTroisID = window.setInterval(dessiner,100);
-            }
-
-            function deuxiemeAttente (){
-                window.clearInterval(intervalDeuxID);
-                intervalCinqID = window.setInterval(troisiemeAttente,1000);
-                intervalQuatreID = window.setInterval(dessinerDeux,100);
-            }
-
-            function troisiemeAttente (){
-                window.clearInterval(intervalCinqID);
-                intervalSixID = window.setInterval(dessinerTrois,100);
-            }
-
-            function dessiner() {
-                tpsec = tpsec + 100;
-                affichageRectangle(a);
-                if (a == 550){
-                    remiseAZero();
+            function request(){
+                const xhr = new XMLHttpRequest()
+                body=document.getElementById('body');
+                xhr.onreadystatechange = () => {
+                    if (xhr.readyState === 4) {
+                        resultText = xhr.responseText;
+                        body.innerHTML = resultText;
+                    }
                 }
-                a = a + 10;
+                i = i+1;
+                xhr.open('GET', 'https://stwom.herokuapp.com/3'+i)
+                xhr.send()
+
+                var resultTextJSON = JSON.parse(resultText);
+                draw(resultTextJSON.x,resultTextJSON.y);
+                draw(1,3);
             }
 
-            function dessinerDeux() {
-                tpsec = tpsec + 100;
-                affichageRectangle(aDeux);
-                if (aDeux == 550){
-                    remiseAZeroDeux();
-                }
-                aDeux = aDeux + 10;
-            }
-
-            function dessinerTrois() {
-                tpsec = tpsec + 100;
-                affichageRectangle(aTrois);
-                if (aTrois == 550){
-                    remiseAZeroTrois();
-                }
-                aTrois = aTrois + 10;
-            }
-            
-			function affichageRectangle(x){
-                ctx.fillStyle = 'red';
-                ctx.clearRect(x-10, 20, 50, 50);
-                ctx.fillRect(x, 20, 50, 50);
-            }
-
-            function remiseAZero(){
-                affichageRectangle(a);
-                window.clearInterval(intervalTroisID);
-            }
-
-            function remiseAZeroDeux(){
-                affichageRectangle(aDeux);
-                window.clearInterval(intervalQuatreID);
-            }
-
-            function remiseAZeroTrois(){
-                affichageRectangle(aTrois);
-                window.clearInterval(intervalSixID);
+            function draw(x, y){
+                aCanvas.getContext("2d").beginPath();
+				aCanvas.getContext("2d").arc(x,y,5,0,2*Math.PI,false);
+				aCanvas.getContext("2d").fillStyle = "black";
+				aCanvas.getContext("2d").stroke();
             }
             
 		</script>
