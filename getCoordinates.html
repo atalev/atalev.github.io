@@ -7,7 +7,6 @@
         
             var aCanvas;
             var intervalID;
-            var body;
             var resultText;
             var resultTextJSON;
             var i = 0;
@@ -26,7 +25,6 @@
 
             function request(){
                 const xhr = new XMLHttpRequest()
-                body=document.getElementById('body');
                 xhr.onreadystatechange = () => {
                     if (xhr.readyState === 4) {
                         resultText = xhr.responseText;

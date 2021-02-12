@@ -7,11 +7,9 @@
         
             var aCanvas;
             var intervalID;
-            var body;
-            var resultText;
-            var resultTextJSON;
+            var responseTextJSON;
             var i = 0;
-
+            
             function init() {
                 aCanvas=document.getElementById('monCanvas');
                 intervalID = window.setInterval(request,100);
@@ -26,17 +24,13 @@
 
             function request(){
                 const xhr = new XMLHttpRequest()
-                body=document.getElementById('body');
-                xhr.onreadystatechange = () => {
-                    if (xhr.readyState === 4) {
-                        resultText = xhr.responseText;
-                        resultTextJSON = JSON.parse(resultText);
-                        draw(resultTextJSON.x,resultTextJSON.y);
-                    }
-                }
                 i = i+1;
-                xhr.open('GET', 'https://stwom.herokuapp.com/3'+i)
-                xhr.send()
+                fetch('https://stwom.herokuapp.com/3'+i)
+                .then(response => response.text())
+                .then((responseText) => {
+                    responseTextJSON = JSON.parse(responseText);
+                    draw(responseTextJSON.x,responseTextJSON.y);
+                })
                 window.clearInterval(intervalID);
                 intervalID = window.setInterval(request,100);
             }
