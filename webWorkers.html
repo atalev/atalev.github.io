@@ -5,42 +5,59 @@
 		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
 		<script>
             var aCanvas;
-            const myWorker = new Worker("CircleWorker.js");;
+            var context;
 
-            function init() {
-                aCanvas=document.getElementById('monCanvas');
-                initWorker();
+            function getRandomInt(max) {
+                return Math.floor(Math.random() * Math.floor(max));
             }
 
-            function draw(x, y){
-                aCanvas.getContext("2d").beginPath();
-				aCanvas.getContext("2d").arc(x,y,5,0,2*Math.PI,false);
-				aCanvas.getContext("2d").fillStyle = "red";
-				aCanvas.getContext("2d").stroke();
+            function draw(x, y, radius,color){
+                context.beginPath();
+				context.arc(x,y,radius,0,2*Math.PI,false);
+				context.fillStyle = color;
+                context.fill();
+				context.stroke();
             }
-
-            function initWorker(){
-                myWorker.postMessage('Des coordonées svp');
-                var x;
-                var y;
-                myWorker.onmessage = function(e) {
-                    x = e.data[0];
-                    y = e.data[1];
-                    draw(x,y);
-                }
-            } 
 
             class DrawWorker{
-                constructor(context, width, height, x, y, speed, delay){
-                    this.context=context;
-                    this.width=width;
-                    this.height=height;
-                    this.x=x;
-                    this.y=y;
-                    this.speed=speed;
-                    this.delay=delay;
-                    this.hasStarted=false;
+                constructor(radius,color){
+                    this.radius=radius;
+                    this.color=color;
+                    this.x;
+                    this.y;
+                    this.myWorker = new Worker("CircleWorker.js");
                 }
+
+                initialize(){
+                    this.myWorker.postMessage([this.radius,this.color]);
+                    this.myWorker.onmessage = function(e) {
+                        let x = e.data[0];
+                        let y = e.data[1];
+                        let radius = e.data[2];
+                        let color = e.data[3];
+                        draw(x,y,radius,color);
+                    }
+                }
+            }
+
+            function init() {
+                aCanvas = document.getElementById('monCanvas');
+                context = aCanvas.getContext("2d");
+                
+                var drawWorkerUn = new DrawWorker(10,"blue");
+                var drawWorkerDeux = new DrawWorker(5,"red");
+                var drawWorkerTrois = new DrawWorker(25,"yellow");
+                var drawWorkerQuatre = new DrawWorker(15,"green");
+                var drawWorkerCinq = new DrawWorker(15,"cyan");
+                var drawWorkerSix = new DrawWorker(15,"magenta");
+
+                drawWorkerUn.initialize();
+                drawWorkerDeux.initialize();
+                drawWorkerTrois.initialize();
+                drawWorkerQuatre.initialize();
+                drawWorkerCinq.initialize();
+                drawWorkerSix.initialize();
+
             }
 		</script>
     </head>
