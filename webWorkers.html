@@ -4,37 +4,44 @@
 		</style>
 		<SCRIPT LANGUAGE="Javascript"></SCRIPT>
 		<script>
-        
             var aCanvas;
-            var intervalID;
-            var responseTextJSON;
-            var i = 0;
-            
+            const myWorker = new Worker("CircleWorker.js");;
+
             function init() {
                 aCanvas=document.getElementById('monCanvas');
-                intervalID = window.setInterval(request,100);
+                initWorker();
             }
 
             function draw(x, y){
                 aCanvas.getContext("2d").beginPath();
 				aCanvas.getContext("2d").arc(x,y,5,0,2*Math.PI,false);
-				aCanvas.getContext("2d").fillStyle = "black";
+				aCanvas.getContext("2d").fillStyle = "red";
 				aCanvas.getContext("2d").stroke();
             }
 
-            function request(){
-                const xhr = new XMLHttpRequest()
-                i = i+1;
-                fetch('https://stwom.herokuapp.com/3'+i)
-                .then(response => response.text())
-                .then((responseText) => {
-                    responseTextJSON = JSON.parse(responseText);
-                    draw(responseTextJSON.x,responseTextJSON.y);
-                })
-                window.clearInterval(intervalID);
-                intervalID = window.setInterval(request,100);
+            function initWorker(){
+                myWorker.postMessage('Des coordonées svp');
+                var x;
+                var y;
+                myWorker.onmessage = function(e) {
+                    x = e.data[0];
+                    y = e.data[1];
+                    draw(x,y);
+                }
+            } 
+
+            class DrawWorker{
+                constructor(context, width, height, x, y, speed, delay){
+                    this.context=context;
+                    this.width=width;
+                    this.height=height;
+                    this.x=x;
+                    this.y=y;
+                    this.speed=speed;
+                    this.delay=delay;
+                    this.hasStarted=false;
+                }
             }
-            
 		</script>
     </head>
     <canvas id="monCanvas" width="600" height="600"></canvas>
